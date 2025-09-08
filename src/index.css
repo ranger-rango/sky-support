@@ -249,7 +249,7 @@ main h3 {
 form {
   display: flex;
   flex-direction: column;
-  width: 53vw;
+  width: 33rem;
   gap: 1rem;
   padding: 1rem 0;
 }
@@ -305,8 +305,21 @@ textarea {
 .input-manipulators > div {
   display: flex;
   border: .05rem solid var(--primary-gray-border);
-  padding: .3rem;
+  padding: 0 .3rem;
   border-radius: .3rem;
+  gap: .1rem;
+}
+
+.input-manipulators svg {
+  border-right: .07rem solid var(--primary-gray-border);
+}
+
+.input-manipulators > div > svg:last-child {
+  border: none;
+}
+
+.input-manipulators svg:hover {
+  cursor: pointer;
 }
 
 .form-footer {
@@ -342,7 +355,7 @@ textarea {
 
 table {
   border-collapse: collapse;
-  margin: 1rem auto;
+  margin: .5rem auto;
   width: 100%;
 }
 
