@@ -303,6 +303,34 @@ export default function IndexPage()
         }
     ];
 
+    let ticketData : any[] = JSON.parse(localStorage.getItem("ticketData") || "[]")
+    const ticketColHeaders = [
+        {
+            id : "main_category",
+            columnName : "Main Category",
+            hide : false,
+            render : false
+        },
+        {
+            id : "sub_category",
+            columnName : "Sub Category",
+            hide : false,
+            render : false
+        },
+        {
+            id : "problem_issue",
+            columnName : "Problem/Issue",
+            hide : false,
+            render : false
+        },
+        {
+            id : "description",
+            columnName : "description",
+            hide : false,
+            render : false
+        }
+    ]
+
     return (
         <>
         <Nav navTitle="Help Desk - Sky World Limited" party="VENDOR" className="nav-vendor" htmlEl={
@@ -340,7 +368,8 @@ export default function IndexPage()
                 </div>
 
                 <section className="main-body">
-                    <RenderTable colHeaders={columnHeaders} tableData={data} />
+                    {/* <RenderTable colHeaders={columnHeaders} tableData={data} /> */}
+                    <RenderTable colHeaders={ticketColHeaders} tableData={ticketData} />
                 </section>
             </>
         } />
