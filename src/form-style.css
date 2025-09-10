@@ -1,0 +1,186 @@
+form {
+  display: flex;
+  flex-direction: column;
+  width: 33rem;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+
+label {
+  color: black;
+  font-size: .8rem;
+}
+
+input {
+  color: black;
+  padding: .3rem .5rem;
+  border: .07rem solid var(--primary-gray-border);
+  font-size: .8rem;
+}
+
+input:focus {
+  outline: none;
+}
+
+input::placeholder {
+  color: var(--primary-gray-border);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.file-label {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.file-label span {
+  color: black;
+  border: .05rem solid var(--primary-gray-border);
+  width: fit-content;
+  padding: .3rem .5rem;
+  border-radius: .3rem;
+}
+
+.file-label span:hover {
+  cursor: pointer;
+}
+
+.file-info {
+  font-style: italic;
+  color: gray;
+  font-size: .8rem;
+}
+
+.file-info b {
+  color: black;
+}
+
+.files-ul {
+  list-style: none;
+}
+
+.files-li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.files-li span {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  color: var(--files-uploaded);
+  font-size: .8rem;
+}
+
+.rm-file:hover {
+  cursor: pointer;
+}
+
+.description-cont {
+  width: 100%;
+  border: .07rem solid var(--primary-gray-border);
+  height: fit-content;
+  padding: 0;
+}
+
+textarea {
+  color: black;
+  padding: .3rem .5rem;
+  border: none;
+  border-top: .07rem solid var(--primary-gray-border);
+  font-size: .8rem;
+  min-height: 7rem;
+  width: 100%;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.input-manipulators {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  background-color: white;
+  padding: .5rem;
+}
+
+.input-manipulators > div {
+  display: flex;
+  border: .05rem solid var(--primary-gray-border);
+  padding: 0 .3rem;
+  border-radius: .3rem;
+  gap: .1rem;
+}
+
+.input-manipulators button {
+  background-color: transparent;
+  border: none;
+}
+
+.input-manipulators svg {
+  border-right: .07rem solid var(--primary-gray-border);
+}
+
+.input-manipulators > div > svg:last-child {
+  border: none;
+}
+
+.input-manipulators svg:hover {
+  cursor: pointer;
+}
+
+.ProseMirror {
+  color: black;
+  background-color: white;
+  min-height: 7rem;
+  padding: 0 1rem;
+}
+
+.ProseMirror > * {
+  color: black;
+}
+
+.ProseMirror:focus {
+  outline: none;
+}
+
+.form-footer {
+  grid-area: form-footer;
+  border-top: .05rem solid var(--primary-gray-border);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.gen-btn {
+  padding: .3rem .7rem;
+  border-radius: .2rem;
+  font-size: .8rem;
+  border: none;
+}
+
+.gen-btn:hover {
+  cursor: pointer;
+}
+
+.pri-btn {
+  background-color: var(--primary-nav);
+}
+
+.sec-btn {
+  background-color: transparent;
+  color: var(--client-text);
+  border: .05rem solid var(--client-text);
+}

@@ -1,0 +1,17 @@
+table {
+  border-collapse: collapse;
+  margin: .5rem auto;
+  width: 100%;
+}
+
+tr {
+  border: .05rem solid var(--primary-gray-border);
+  background-color: white;
+}
+
+th, td {
+  color: black;
+  padding: .3rem .5rem;
+  font-size: .8rem;
+  text-align: left;
+}

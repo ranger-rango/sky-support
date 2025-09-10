@@ -2,13 +2,8 @@ import MainBody from "../components/main-body";
 import Nav from "../components/nav";
 import Button from "../components/btn";
 import HandleSubmit from "../components/handle-submit";
+// import TiptapEditor from "../components/tiptap-editor";
 import { useState } from "react";
-
-// interface FileWithId extends File
-// {
-//   id: string;
-
-// }
 
 interface FileWithId {
   id: string;
@@ -77,6 +72,8 @@ export default function CreateTicket()
 
                         <div>
                             <label htmlFor="description">Description</label>
+                            {/* <TiptapEditor /> */}
+
                             <div className="description-cont">
                                 <div className="input-manipulators">
                                     <div>

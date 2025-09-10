@@ -1,0 +1,18 @@
+:root {
+  --primary-nav: #144D5A;
+  --primary-main: #F7FCFD;
+  --primary-sm-header: #F5F7F9;
+  --primary-footer: #E0E9EB;
+  --primary-white: #E3E3E3;
+  --primary-body-nav-bg: #F5F7F9;
+  --primary-side-nav: #E3E3E3;
+  --primary-gray-border: #DEE2E6;
+
+  --vendor-text: #228BE6;
+  --vendor-bg: #E7F5FF;
+  --client-text: #FD7E14;
+  --client-bg: #FFF4E6;
+
+  --side-nav-hover: #DBF2F8;
+  --files-uploaded: #1C7ED6;
+}
