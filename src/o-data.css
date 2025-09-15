@@ -1,0 +1,32 @@
+#filterSortForm {
+    position: fixed;
+    top: 30%;
+    left: 30%;
+    background-color: var(--primary-footer);
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+}
+
+#filterSortForm select, #filterSortForm input {
+    padding: .5rem;
+    border: .05rem solid var(--primary-gray-border);
+    color: black;
+}
+
+#filterSortForm option {
+    color: black;
+}
+
+.o-data-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: .5rem;
+}
+
+#pageInfo {
+    color: black;
+    font-size: .8rem    ;
+}

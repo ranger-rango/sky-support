@@ -3,6 +3,7 @@ interface RenderTableProps
 {
     colHeaders : any[]
     tableData : any[]
+    onRowClick ?: (row: any) => void
 }
 export default function RenderTable(table : RenderTableProps)
 {
@@ -22,14 +23,14 @@ export default function RenderTable(table : RenderTableProps)
             <tbody>
                 {
                     table.tableData.map((row) => (
-                        <tr key={row.user_name}>
+                        <tr key={row.ticket_id} onClick={() => table.onRowClick && table.onRowClick(row)} className={table.onRowClick ? "cursor-pointer" : ""} >
                             {
                                 table.colHeaders.map((col) => 
                                 {
                                     if (!col.hide && typeof row[col.id] !== "undefined")
                                     {
                                         return (
-                                            <td>
+                                            <td key={col.id}>
                                                 {row[col.id]}
                                             </td>
                                         )
@@ -37,7 +38,7 @@ export default function RenderTable(table : RenderTableProps)
                                     else
                                     {
                                         return (
-                                            <td>-</td>
+                                            <td key={col.id}>-</td>
                                         )
                                     }
                                 })

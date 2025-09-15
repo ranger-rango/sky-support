@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 
 interface AnchLink
 {
@@ -10,6 +10,6 @@ interface AnchLink
 export default function NavigationLink( anchor : AnchLink)
 {
     return (
-        <NavLink className={anchor.className} to={anchor.href} > {anchor.label} </NavLink>
+        <Link className={anchor.className} to={anchor.href} > {anchor.label} </Link>
     )
 }

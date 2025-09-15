@@ -1,6 +1,11 @@
 @import url("./variables.css");
 @import url("./table-style.css");
 @import url("./form-style.css");
+@import url("./buildSortFilter.css");
+@import url("./edit-form-style.css");
+@import url("./preview-style.css");
+@import url("./auth-style.css");
+@import url("./o-data.css");
 
 * {
   font-family: Arial, Helvetica, sans-serif;
@@ -24,6 +29,14 @@ html {
   grid-template-columns: 48px 1fr;
   grid-template-rows: 48px 1fr 36px;
   height: 100vh;
+}
+
+#root.collapsed {
+  grid-template-columns: 48px 1fr;
+}
+
+#root.expanded {
+  grid-template-columns: 200px 1fr;
 }
 
 body {
@@ -108,12 +121,46 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 0;
+  /* width: 5rem; */
+  /* z-index: 1000; */
+}
+
+.side-panel button {
+  background-color: transparent;
+  border: none;
+  width: 100%;
 }
 
 .side-panel > div {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
+  width: 100%;
+}
+
+.side-panel p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: .8rem;
+  width: 100%;
+  padding: .3rem 0;
+}
+
+.side-panel p:hover {
+  background-color: var(--primary-nav-hover);
+}
+
+.sp-label.collapsed {
+  display: none;
+}
+
+.sp-label.expanded {
+  display: flex;
+  min-width: 8rem;
 }
 
 .ftr {
@@ -174,6 +221,11 @@ main h3 {
   justify-content: space-between;
 }
 
+.main-header > div {
+  display: flex;
+  gap: 1rem;
+}
+
 .create-ticket-btn {
   text-decoration: none;
   background-color: var(--primary-nav);
@@ -230,4 +282,37 @@ main h3 {
   align-items: center;
   gap: .5rem;
   font-size: .8rem;
+}
+
+.x-btn {
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+}
+
+.x-reset {
+  width: 1rem;
+}
+
+.row-actions-cont {
+  position: fixed;
+  top: 30%;
+  left: 30%;
+  background-color: var(--primary-nav);
+  padding: 1rem;
+  min-width: 40rem;
+  max-width: 45rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.row-actions-hdr {
+  font-size: 1rem;
+}
+
+.row-actions-div {
+  display: flex;
+  gap: 1rem;
 }

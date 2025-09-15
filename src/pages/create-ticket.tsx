@@ -43,6 +43,12 @@ export default function CreateTicket()
     {
         setFiles((prev: any[]) => prev.filter((file) => file.id !== id))
     }
+    // const submit = (e : any) => 
+    // {
+    //     e.preventDefault();
+    //     const formData = new FormData(e.currentTarget)
+    //     HandleSubmit(formData)
+    // }
     return (
         <>
         <Nav navTitle="Help Desk - Njiwa SACCO" party="CLIENT" className="nav-client" />
@@ -54,7 +60,7 @@ export default function CreateTicket()
                 </div>
 
                 <section className="main-body">
-                    <form method="post" id="raise-ticket-form" action={HandleSubmit}>
+                    <form method="post" id="raise-ticket-form" action={HandleSubmit} >
                         <div>
                             <label htmlFor="main_category">Main Category</label>
                             <input type="text" id="main_category" name="main_category" />
@@ -156,7 +162,7 @@ export default function CreateTicket()
                                 Attachment
                                 <span>Select File(s)</span>
                             </label>
-                            <input type="file" name="attachment" id="attachment" accept=".jpg, .jpeg, .pdf, .png"  multiple onChange={handleFileChange} />
+                            <input type="file" name="attachment" id="attachment" accept=".jpg, .jpeg, .pdf, .png"  multiple />
                             <div className="file-info">
                                 Allowed file extensions: <b>.jpg, .jpeg, .pdf, .png</b><br />
                                 Maximum File Size: <b>2MB</b><br />

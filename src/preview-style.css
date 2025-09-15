@@ -1,0 +1,18 @@
+.preview-ticket {
+    position: fixed;
+    top: 30%;
+    left: 30%;
+    background-color: var(--primary-nav);
+    padding: 1rem 5rem;
+    min-width: 40rem;
+    max-width: 45rem;
+    line-height: 2rem;
+}
+
+.preview-ticket-hdr {
+    font-size: 1rem;
+}
+
+.preview-ticket p {
+    font-size: .8rem;
+}
