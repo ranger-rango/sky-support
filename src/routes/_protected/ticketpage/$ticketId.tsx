@@ -1,11 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
-import Nav from '../../components/nav';
-import MainBody from '../../components/main-body';
+import Nav from '../../../components/nav';
+import MainBody from '../../../components/main-body';
 import "/front-end/react/sky-support/src/index.css"
-import EditForm from '../../components/edit-ticket';
-import Button from '../../components/btn';
+import EditForm from '../../../components/edit-ticket';
+import Button from '../../../components/btn';
 
-export const Route = createFileRoute('/ticketpage/$ticketId')({
+export const Route = createFileRoute('/_protected/ticketpage/$ticketId')({
   component: RouteComponent,
 })
 

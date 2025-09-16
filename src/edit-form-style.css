@@ -26,3 +26,25 @@
 .row-action-btn {
     border: .05rem solid white;
 }
+
+.file-prev-cont {
+    height: 500px;
+    padding: 1rem;
+    overflow: auto;
+}
+
+.file-prev-cont li {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.dwn-link {
+    color: var(--client-text);
+    font-size: .8rem;
+}
+
+.file-prev {
+    width: 400px;
+    height: 350px;
+}

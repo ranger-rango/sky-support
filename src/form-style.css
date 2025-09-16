@@ -184,3 +184,8 @@ textarea:focus {
   color: var(--client-text);
   border: .05rem solid var(--client-text);
 }
+
+.form-errors {
+  font-size: .8rem;
+  color: red;
+}

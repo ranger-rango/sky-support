@@ -1,5 +1,3 @@
-// import { useState } from "react";
-import Button from "./btn";
 import HandleSubmit from "./handle-submit";
 
 interface EditProps
@@ -12,6 +10,11 @@ export default function EditForm(editProps : EditProps)
 
     let ticketData : any[] = JSON.parse(localStorage.getItem("ticketData") || "[]")
     let rowData : any = ticketData.find(row => row.ticket_id === editProps.ticketId)
+    const attachments = Array.isArray(rowData?.["attachment[]"])
+    ? rowData["attachment[]"]
+    : rowData?.["attachment[]"]
+    ? [rowData["attachment[]"]]
+    : [];
 
     const handleChange = () => {}
     const handleFileChange = () => {}
@@ -32,12 +35,12 @@ export default function EditForm(editProps : EditProps)
                 <div>
                     <label className="">Attachments</label>
                     <input type="file" multiple onChange={handleFileChange} />
-                    {rowData.attachment.length > 0 && (
-                    <ul >
-                        {rowData.attachment.map((f : any, i : number) => (
+                    {attachments.length > 0 && (
+                    <ul className="file-prev-cont" >
+                        {attachments.map((f : any, i : number) => (
                             <li key={f.id}>
-                                <embed src={f.data} type={f.type} />
-                                <a href={f.url} target="_blank"  rel="noreferrer" className="" download={f.name || `attachment-${i}`}>
+                                <embed className="file-prev" src={f.data} type={f.type} />
+                                <a href={f.data} target="_blank"  rel="noreferrer" className="dwn-link" download={f.name || `attachment-${i}`}>
                                     {f.name  || "Download file"}
                                 </a>
                             </li>
@@ -45,11 +48,6 @@ export default function EditForm(editProps : EditProps)
                     </ul>
                     )}
                 </div>
-                
-                {/* <div className="edit-btns">
-                    <Button id="" className="gen-btn sec-btn" type="button" label="Cancel" onClick={onCancel} />
-                    <Button id="" className="gen-btn pri-btn row-action-btn" label="Save" type="submit" />
-                </div> */}
 
             </form>
 

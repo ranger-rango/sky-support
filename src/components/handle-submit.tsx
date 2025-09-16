@@ -10,7 +10,7 @@ function generateUUID(): string {
 function genID(): string {
     const uuid: string = generateUUID().replace(/-/g, "");
     const bytes: string[] = uuid.match(/.{2}/g)?.map((byte: string) => String.fromCharCode(parseInt(byte, 16))) ?? [];
-    return btoa(bytes.join("")).replace(/=/g, "").substring(0, 16);
+    return btoa(bytes.join("")).replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "").substring(0, 16);
 }
 
 interface SubmitProps

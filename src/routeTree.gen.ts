@@ -11,12 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProtectedRouteImport } from './routes/_protected'
 import { Route as ProtectedIndexRouteImport } from './routes/_protected/index'
-import { Route as TicketpageTicketIdRouteImport } from './routes/ticketpage/$ticketId'
 import { Route as ProtectedRaiseTicketRouteImport } from './routes/_protected/raise-ticket'
 import { Route as PublicODataODataRouteImport } from './routes/_public/o-data/o-data'
 import { Route as PublicAuthRegisterRouteImport } from './routes/_public/auth/register'
 import { Route as PublicAuthLoginRouteImport } from './routes/_public/auth/login'
 import { Route as PublicAuthForgotPasswordRouteImport } from './routes/_public/auth/forgot-password'
+import { Route as ProtectedTicketpageTicketIdRouteImport } from './routes/_protected/ticketpage/$ticketId'
 
 const ProtectedRoute = ProtectedRouteImport.update({
   id: '/_protected',
@@ -26,11 +26,6 @@ const ProtectedIndexRoute = ProtectedIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => ProtectedRoute,
-} as any)
-const TicketpageTicketIdRoute = TicketpageTicketIdRouteImport.update({
-  id: '/ticketpage/$ticketId',
-  path: '/ticketpage/$ticketId',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const ProtectedRaiseTicketRoute = ProtectedRaiseTicketRouteImport.update({
   id: '/raise-ticket',
@@ -58,11 +53,17 @@ const PublicAuthForgotPasswordRoute =
     path: '/auth/forgot-password',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ProtectedTicketpageTicketIdRoute =
+  ProtectedTicketpageTicketIdRouteImport.update({
+    id: '/ticketpage/$ticketId',
+    path: '/ticketpage/$ticketId',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/raise-ticket': typeof ProtectedRaiseTicketRoute
-  '/ticketpage/$ticketId': typeof TicketpageTicketIdRoute
   '/': typeof ProtectedIndexRoute
+  '/ticketpage/$ticketId': typeof ProtectedTicketpageTicketIdRoute
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
@@ -70,8 +71,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/raise-ticket': typeof ProtectedRaiseTicketRoute
-  '/ticketpage/$ticketId': typeof TicketpageTicketIdRoute
   '/': typeof ProtectedIndexRoute
+  '/ticketpage/$ticketId': typeof ProtectedTicketpageTicketIdRoute
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
@@ -81,8 +82,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_protected': typeof ProtectedRouteWithChildren
   '/_protected/raise-ticket': typeof ProtectedRaiseTicketRoute
-  '/ticketpage/$ticketId': typeof TicketpageTicketIdRoute
   '/_protected/': typeof ProtectedIndexRoute
+  '/_protected/ticketpage/$ticketId': typeof ProtectedTicketpageTicketIdRoute
   '/_public/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/_public/auth/login': typeof PublicAuthLoginRoute
   '/_public/auth/register': typeof PublicAuthRegisterRoute
@@ -92,8 +93,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/raise-ticket'
-    | '/ticketpage/$ticketId'
     | '/'
+    | '/ticketpage/$ticketId'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
@@ -101,8 +102,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/raise-ticket'
-    | '/ticketpage/$ticketId'
     | '/'
+    | '/ticketpage/$ticketId'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
@@ -111,8 +112,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_protected'
     | '/_protected/raise-ticket'
-    | '/ticketpage/$ticketId'
     | '/_protected/'
+    | '/_protected/ticketpage/$ticketId'
     | '/_public/auth/forgot-password'
     | '/_public/auth/login'
     | '/_public/auth/register'
@@ -121,7 +122,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   ProtectedRoute: typeof ProtectedRouteWithChildren
-  TicketpageTicketIdRoute: typeof TicketpageTicketIdRoute
   PublicAuthForgotPasswordRoute: typeof PublicAuthForgotPasswordRoute
   PublicAuthLoginRoute: typeof PublicAuthLoginRoute
   PublicAuthRegisterRoute: typeof PublicAuthRegisterRoute
@@ -143,13 +143,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof ProtectedIndexRouteImport
       parentRoute: typeof ProtectedRoute
-    }
-    '/ticketpage/$ticketId': {
-      id: '/ticketpage/$ticketId'
-      path: '/ticketpage/$ticketId'
-      fullPath: '/ticketpage/$ticketId'
-      preLoaderRoute: typeof TicketpageTicketIdRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/_protected/raise-ticket': {
       id: '/_protected/raise-ticket'
@@ -186,17 +179,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicAuthForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_protected/ticketpage/$ticketId': {
+      id: '/_protected/ticketpage/$ticketId'
+      path: '/ticketpage/$ticketId'
+      fullPath: '/ticketpage/$ticketId'
+      preLoaderRoute: typeof ProtectedTicketpageTicketIdRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
   }
 }
 
 interface ProtectedRouteChildren {
   ProtectedRaiseTicketRoute: typeof ProtectedRaiseTicketRoute
   ProtectedIndexRoute: typeof ProtectedIndexRoute
+  ProtectedTicketpageTicketIdRoute: typeof ProtectedTicketpageTicketIdRoute
 }
 
 const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedRaiseTicketRoute: ProtectedRaiseTicketRoute,
   ProtectedIndexRoute: ProtectedIndexRoute,
+  ProtectedTicketpageTicketIdRoute: ProtectedTicketpageTicketIdRoute,
 }
 
 const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(
@@ -205,7 +207,6 @@ const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   ProtectedRoute: ProtectedRouteWithChildren,
-  TicketpageTicketIdRoute: TicketpageTicketIdRoute,
   PublicAuthForgotPasswordRoute: PublicAuthForgotPasswordRoute,
   PublicAuthLoginRoute: PublicAuthLoginRoute,
   PublicAuthRegisterRoute: PublicAuthRegisterRoute,

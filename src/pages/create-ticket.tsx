@@ -3,9 +3,20 @@ import Nav from "../components/nav";
 import Button from "../components/btn";
 import HandleSubmit from "../components/handle-submit";
 // import TiptapEditor from "../components/tiptap-editor";
-import { useState } from "react";
+import { useForm } from "react-hook-form"
+import React, { useState } from "react";
 
-interface FileWithId {
+interface FormValues
+{
+    main_category : string
+    sub_category : string
+    problem_issue : string
+    description : string
+    attachment : File
+}
+
+interface FileWithId
+{
   id: string;
   name: string;
   size: number;
@@ -16,7 +27,33 @@ interface FileWithId {
 
 export default function CreateTicket()
 {
+    const { register, handleSubmit, formState : { errors } } = useForm<FormValues>(
+        {
+            mode : "all"
+        }
+    )
     const [files, setFiles] = useState<FileWithId[]>([]);
+
+    const onValid = (data: FormValues) =>
+    {
+        const formData = new FormData()
+        formData.append("main_category", data.main_category);
+        formData.append("sub_category", data.sub_category);
+        formData.append("problem_issue", data.problem_issue);
+        formData.append("description", data.description);
+
+        files.forEach((fileObj) => 
+        {
+            formData.append("attachment[]", fileObj.file, fileObj.name);
+        });
+        HandleSubmit(formData)
+        const form = document.getElementById("raise-ticket-form") as HTMLFormElement | null
+        if (form) 
+        {
+            form.reset()
+        }
+    }
+
     const maxFiles = 5;
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,12 +80,8 @@ export default function CreateTicket()
     {
         setFiles((prev: any[]) => prev.filter((file) => file.id !== id))
     }
-    // const submit = (e : any) => 
-    // {
-    //     e.preventDefault();
-    //     const formData = new FormData(e.currentTarget)
-    //     HandleSubmit(formData)
-    // }
+    
+
     return (
         <>
         <Nav navTitle="Help Desk - Njiwa SACCO" party="CLIENT" className="nav-client" />
@@ -60,20 +93,23 @@ export default function CreateTicket()
                 </div>
 
                 <section className="main-body">
-                    <form method="post" id="raise-ticket-form" action={HandleSubmit} >
+                    <form method="post" id="raise-ticket-form" onSubmit={handleSubmit(onValid)} >
                         <div>
                             <label htmlFor="main_category">Main Category</label>
-                            <input type="text" id="main_category" name="main_category" />
+                            <input type="text" id="main_category" {...register("main_category", {required : "Main Category is required !!!"})} />
+                            { errors.main_category && <p className="form-errors"> { errors.main_category.message } </p> }
                         </div>
 
                         <div>
                             <label htmlFor="sub_category">Sub Category</label>
-                            <input type="text" id="sub_category" name="sub_category" />
+                            <input type="text" id="sub_category" {...register("sub_category", {required : "Sub Category is required !!!"})} />
+                            { errors.sub_category && <p className="form-errors"> { errors.sub_category.message } </p> }
                         </div>
 
                         <div>
                             <label htmlFor="problem_issue">Problem/Issue</label>
-                            <input type="text" id="problem_issue" name="problem_issue" />
+                            <input type="text" id="problem_issue" {...register("problem_issue", {required : "Problem Issue is required !!!"})} />
+                            { errors.problem_issue && <p className="form-errors"> { errors.problem_issue.message } </p> }
                         </div>
 
                         <div>
@@ -153,7 +189,8 @@ export default function CreateTicket()
                                     </div>
 
                                 </div>
-                                <textarea name="description" id="description"></textarea>
+                                <textarea id="description" {...register("description", {required : "Description is required"})}></textarea>
+                                { errors.description && <p className="form-errors"> { errors.description.message } </p> }
                             </div>
                         </div>
 
@@ -162,7 +199,22 @@ export default function CreateTicket()
                                 Attachment
                                 <span>Select File(s)</span>
                             </label>
-                            <input type="file" name="attachment" id="attachment" accept=".jpg, .jpeg, .pdf, .png"  multiple />
+                            <input type="file" id="attachment" name="attachment" accept=".jpg, .jpeg, .pdf, .png"  multiple onChange=
+                                {(e) => 
+                                    {
+                                        handleFileChange(e)
+                                        register("attachment").onChange(e)
+                                    }
+                                }
+                            />
+                            {/* <input type="file" id="attachment" accept=".jpg, .jpeg, .pdf, .png"  multiple {...register("attachment", {required : "At Least one attachment is required"})} onChange=
+                            {(e) => 
+                                {
+                                    handleFileChange(e)
+                                    register("attachment").onChange(e)
+                                }
+                            } />
+                            { errors.attachment && <p className="form-errors"> { errors.attachment.message } </p> } */}
                             <div className="file-info">
                                 Allowed file extensions: <b>.jpg, .jpeg, .pdf, .png</b><br />
                                 Maximum File Size: <b>2MB</b><br />
