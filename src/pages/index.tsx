@@ -8,6 +8,8 @@ import BuildSortFilter from "../components/buildSortFilter";
 import { useNavigate, useParams } from "@tanstack/react-router";
 import { useState } from "react";
 
+import { VisibilityProvider, Exp } from "../components/exp";
+
 export default function IndexPage()
 {
 
@@ -39,48 +41,46 @@ export default function IndexPage()
         }
     ]
 
-    const [isSortOpen, setIsSortOpen] = useState(false);
-    const [isFilterOpen, setIsFilterOpen] = useState(false);
+    const [isSortOpen, setIsSortOpen] = useState(false)
+    const [isFilterOpen, setIsFilterOpen] = useState(false)
 
     const handleSortApply = (criteria: { [key: string]: string }) =>
     {
-        console.log("Sort criteria:", criteria);
-        localStorage.setItem("sortCriteria", JSON.stringify(criteria));
-        setIsSortOpen(false);
-        window.location.reload();
+        localStorage.setItem("sortCriteria", JSON.stringify(criteria))
+        setIsSortOpen(false)
+        window.location.reload()
     };
 
     const handleFilterApply = (criteria: { [key: string]: string }) =>
     {
-        console.log("Filter criteria:", criteria);
-        localStorage.setItem("filterCriteria", JSON.stringify(criteria));
-        setIsFilterOpen(false);
-        window.location.reload();
+        localStorage.setItem("filterCriteria", JSON.stringify(criteria))
+        setIsFilterOpen(false)
+        window.location.reload()
     };
 
-    const savedFilter = JSON.parse(localStorage.getItem("filterCriteria") || "{}");
-    const savedSort = JSON.parse(localStorage.getItem("sortCriteria") || "{}");
+    const savedFilter = JSON.parse(localStorage.getItem("filterCriteria") || "{}")
+    const savedSort = JSON.parse(localStorage.getItem("sortCriteria") || "{}")
 
     let filteredData = ticketData;
     if (savedFilter.column && savedFilter.relation && savedFilter.filt_value)
     {
         const col = savedFilter.column;
-        const val = savedFilter.filt_value.toLowerCase();
+        const val = savedFilter.filt_value.toLowerCase()
 
             filteredData = filteredData.filter((row) =>
             {
-                const cell = String(row[col] ?? "").toLowerCase();
+                const cell = String(row[col] ?? "").toLowerCase()
 
                 switch (savedFilter.relation)
                 {
                     case "equals":
-                        return cell === val;
+                        return cell === val
                     case "contains":
-                        return cell.includes(val);
+                        return cell.includes(val)
                     case "starts with":
-                        return cell.startsWith(val);
+                        return cell.startsWith(val)
                     case "ends with":
-                        return cell.endsWith(val);
+                        return cell.endsWith(val)
                     default:
                         return true;
                 }
@@ -93,8 +93,8 @@ export default function IndexPage()
         const order = savedSort.order || "asc";
         filteredData = [...filteredData].sort((a, b) =>
             {
-            const av = String(a[col] ?? "").toLowerCase();
-            const bv = String(b[col] ?? "").toLowerCase();
+            const av = String(a[col] ?? "").toLowerCase()
+            const bv = String(b[col] ?? "").toLowerCase()
             if (av < bv) return order === "asc" ? -1 : 1;
             if (av > bv) return order === "asc" ? 1 : -1;
             return 0;
@@ -140,6 +140,9 @@ export default function IndexPage()
                             All Tickets
                         </h3>
                         <div>
+                            <VisibilityProvider>
+                                <Exp />
+                            </VisibilityProvider>
 
                             {
                                 savedSort?.column ? 
@@ -147,8 +150,8 @@ export default function IndexPage()
                                     <Button onClick={() => {localStorage.removeItem("sortCriteria"); window.location.reload();}} className="x-btn sort-btn gen-btn pri-btn" id="sort-btn" type="button" label= 
                                         {
                                             <>
-                                            Sort
-                                            <svg className="x-reset" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path fill="#ff0033" d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"/></svg>
+                                                Sort
+                                                <svg className="x-reset" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path fill="#ff0033" d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"/></svg>
                                             </>
                                         }
                                     />
@@ -161,8 +164,8 @@ export default function IndexPage()
                                     <Button onClick={() => {localStorage.removeItem("filterCriteria");  window.location.reload();}} className="x-btn filter-btn gen-btn pri-btn"  id="filter-btn" type="button" label=
                                         {
                                             <>
-                                            Filter
-                                            <svg className="x-reset" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path fill="#ff0033" d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"/></svg>
+                                                Filter
+                                                <svg className="x-reset" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path fill="#ff0033" d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"/></svg>
                                             </>
                                         }
                                     />
@@ -213,3 +216,21 @@ export default function IndexPage()
 
 // hooks 
 // beforeload 
+// prop drilling
+// react context 
+
+// Login
+// Dashboard
+// Users 
+//     list
+//     single user 
+// Subjects 
+//     list 
+//     single 
+// All tasks 
+//     list 
+
+// fetch / submit API - useFetchData / useMutateData 
+
+// Forms 
+// Tables / Datatable

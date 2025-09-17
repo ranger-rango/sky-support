@@ -9,6 +9,12 @@ tr {
   background-color: white;
 }
 
+tr:hover {
+  cursor: pointer;
+  background-color: var(--primary-main);
+  border: .05rem solid transparent;
+}
+
 th, td {
   color: black;
   padding: .3rem .5rem;
