@@ -9,7 +9,7 @@ export default function EditForm(editProps : EditProps)
 {
 
     let ticketData : any[] = JSON.parse(localStorage.getItem("ticketData") || "[]")
-    let rowData : any = ticketData.find(row => row.ticket_id === editProps.ticketId)
+    let rowData : any = ticketData.find(row => row.id === editProps.ticketId)
     const attachments = Array.isArray(rowData?.["attachment[]"])
     ? rowData["attachment[]"]
     : rowData?.["attachment[]"]

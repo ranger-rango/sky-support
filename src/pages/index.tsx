@@ -104,8 +104,8 @@ export default function IndexPage()
     const navigate = useNavigate()
     const handleRowClick = (row : any) => 
     {
-        navigate({to : `/ticketpage/${row.ticket_id}`})
-        // navigate({to : "/ticketpage/$ticketId", params : {ticketId : encoded}})
+        navigate({to : `/ticketpage/${row.id}`})
+        // navigate({to : "/ticketpage/$ticketId", params : { ticketId : String(row.id) }})
     }
 
     return (

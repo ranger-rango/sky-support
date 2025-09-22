@@ -17,6 +17,13 @@ import { Route as PublicAuthRegisterRouteImport } from './routes/_public/auth/re
 import { Route as PublicAuthLoginRouteImport } from './routes/_public/auth/login'
 import { Route as PublicAuthForgotPasswordRouteImport } from './routes/_public/auth/forgot-password'
 import { Route as ProtectedTicketpageTicketIdRouteImport } from './routes/_protected/ticketpage/$ticketId'
+import { Route as ProtectedTheDojoAdminRouteRouteImport } from './routes/_protected/the-dojo/admin/route'
+import { Route as ProtectedTheDojoAdminUsersIndexRouteImport } from './routes/_protected/the-dojo/admin/users/index'
+import { Route as ProtectedTheDojoAdminTasksIndexRouteImport } from './routes/_protected/the-dojo/admin/tasks/index'
+import { Route as ProtectedTheDojoAdminSubjectsIndexRouteImport } from './routes/_protected/the-dojo/admin/subjects/index'
+import { Route as ProtectedTheDojoAdminUsersRecordIdRouteImport } from './routes/_protected/the-dojo/admin/users/$recordId'
+import { Route as ProtectedTheDojoAdminTasksRecordIdRouteImport } from './routes/_protected/the-dojo/admin/tasks/$recordId'
+import { Route as ProtectedTheDojoAdminSubjectsRecordIdRouteImport } from './routes/_protected/the-dojo/admin/subjects/$recordId'
 
 const ProtectedRoute = ProtectedRouteImport.update({
   id: '/_protected',
@@ -59,65 +66,149 @@ const ProtectedTicketpageTicketIdRoute =
     path: '/ticketpage/$ticketId',
     getParentRoute: () => ProtectedRoute,
   } as any)
+const ProtectedTheDojoAdminRouteRoute =
+  ProtectedTheDojoAdminRouteRouteImport.update({
+    id: '/the-dojo/admin',
+    path: '/the-dojo/admin',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
+const ProtectedTheDojoAdminUsersIndexRoute =
+  ProtectedTheDojoAdminUsersIndexRouteImport.update({
+    id: '/users/',
+    path: '/users/',
+    getParentRoute: () => ProtectedTheDojoAdminRouteRoute,
+  } as any)
+const ProtectedTheDojoAdminTasksIndexRoute =
+  ProtectedTheDojoAdminTasksIndexRouteImport.update({
+    id: '/tasks/',
+    path: '/tasks/',
+    getParentRoute: () => ProtectedTheDojoAdminRouteRoute,
+  } as any)
+const ProtectedTheDojoAdminSubjectsIndexRoute =
+  ProtectedTheDojoAdminSubjectsIndexRouteImport.update({
+    id: '/subjects/',
+    path: '/subjects/',
+    getParentRoute: () => ProtectedTheDojoAdminRouteRoute,
+  } as any)
+const ProtectedTheDojoAdminUsersRecordIdRoute =
+  ProtectedTheDojoAdminUsersRecordIdRouteImport.update({
+    id: '/users/$recordId',
+    path: '/users/$recordId',
+    getParentRoute: () => ProtectedTheDojoAdminRouteRoute,
+  } as any)
+const ProtectedTheDojoAdminTasksRecordIdRoute =
+  ProtectedTheDojoAdminTasksRecordIdRouteImport.update({
+    id: '/tasks/$recordId',
+    path: '/tasks/$recordId',
+    getParentRoute: () => ProtectedTheDojoAdminRouteRoute,
+  } as any)
+const ProtectedTheDojoAdminSubjectsRecordIdRoute =
+  ProtectedTheDojoAdminSubjectsRecordIdRouteImport.update({
+    id: '/subjects/$recordId',
+    path: '/subjects/$recordId',
+    getParentRoute: () => ProtectedTheDojoAdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/raise-ticket': typeof ProtectedRaiseTicketRoute
   '/': typeof ProtectedIndexRoute
+  '/the-dojo/admin': typeof ProtectedTheDojoAdminRouteRouteWithChildren
   '/ticketpage/$ticketId': typeof ProtectedTicketpageTicketIdRoute
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
   '/o-data/o-data': typeof PublicODataODataRoute
+  '/the-dojo/admin/subjects/$recordId': typeof ProtectedTheDojoAdminSubjectsRecordIdRoute
+  '/the-dojo/admin/tasks/$recordId': typeof ProtectedTheDojoAdminTasksRecordIdRoute
+  '/the-dojo/admin/users/$recordId': typeof ProtectedTheDojoAdminUsersRecordIdRoute
+  '/the-dojo/admin/subjects': typeof ProtectedTheDojoAdminSubjectsIndexRoute
+  '/the-dojo/admin/tasks': typeof ProtectedTheDojoAdminTasksIndexRoute
+  '/the-dojo/admin/users': typeof ProtectedTheDojoAdminUsersIndexRoute
 }
 export interface FileRoutesByTo {
   '/raise-ticket': typeof ProtectedRaiseTicketRoute
   '/': typeof ProtectedIndexRoute
+  '/the-dojo/admin': typeof ProtectedTheDojoAdminRouteRouteWithChildren
   '/ticketpage/$ticketId': typeof ProtectedTicketpageTicketIdRoute
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
   '/o-data/o-data': typeof PublicODataODataRoute
+  '/the-dojo/admin/subjects/$recordId': typeof ProtectedTheDojoAdminSubjectsRecordIdRoute
+  '/the-dojo/admin/tasks/$recordId': typeof ProtectedTheDojoAdminTasksRecordIdRoute
+  '/the-dojo/admin/users/$recordId': typeof ProtectedTheDojoAdminUsersRecordIdRoute
+  '/the-dojo/admin/subjects': typeof ProtectedTheDojoAdminSubjectsIndexRoute
+  '/the-dojo/admin/tasks': typeof ProtectedTheDojoAdminTasksIndexRoute
+  '/the-dojo/admin/users': typeof ProtectedTheDojoAdminUsersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_protected': typeof ProtectedRouteWithChildren
   '/_protected/raise-ticket': typeof ProtectedRaiseTicketRoute
   '/_protected/': typeof ProtectedIndexRoute
+  '/_protected/the-dojo/admin': typeof ProtectedTheDojoAdminRouteRouteWithChildren
   '/_protected/ticketpage/$ticketId': typeof ProtectedTicketpageTicketIdRoute
   '/_public/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/_public/auth/login': typeof PublicAuthLoginRoute
   '/_public/auth/register': typeof PublicAuthRegisterRoute
   '/_public/o-data/o-data': typeof PublicODataODataRoute
+  '/_protected/the-dojo/admin/subjects/$recordId': typeof ProtectedTheDojoAdminSubjectsRecordIdRoute
+  '/_protected/the-dojo/admin/tasks/$recordId': typeof ProtectedTheDojoAdminTasksRecordIdRoute
+  '/_protected/the-dojo/admin/users/$recordId': typeof ProtectedTheDojoAdminUsersRecordIdRoute
+  '/_protected/the-dojo/admin/subjects/': typeof ProtectedTheDojoAdminSubjectsIndexRoute
+  '/_protected/the-dojo/admin/tasks/': typeof ProtectedTheDojoAdminTasksIndexRoute
+  '/_protected/the-dojo/admin/users/': typeof ProtectedTheDojoAdminUsersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/raise-ticket'
     | '/'
+    | '/the-dojo/admin'
     | '/ticketpage/$ticketId'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
     | '/o-data/o-data'
+    | '/the-dojo/admin/subjects/$recordId'
+    | '/the-dojo/admin/tasks/$recordId'
+    | '/the-dojo/admin/users/$recordId'
+    | '/the-dojo/admin/subjects'
+    | '/the-dojo/admin/tasks'
+    | '/the-dojo/admin/users'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/raise-ticket'
     | '/'
+    | '/the-dojo/admin'
     | '/ticketpage/$ticketId'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
     | '/o-data/o-data'
+    | '/the-dojo/admin/subjects/$recordId'
+    | '/the-dojo/admin/tasks/$recordId'
+    | '/the-dojo/admin/users/$recordId'
+    | '/the-dojo/admin/subjects'
+    | '/the-dojo/admin/tasks'
+    | '/the-dojo/admin/users'
   id:
     | '__root__'
     | '/_protected'
     | '/_protected/raise-ticket'
     | '/_protected/'
+    | '/_protected/the-dojo/admin'
     | '/_protected/ticketpage/$ticketId'
     | '/_public/auth/forgot-password'
     | '/_public/auth/login'
     | '/_public/auth/register'
     | '/_public/o-data/o-data'
+    | '/_protected/the-dojo/admin/subjects/$recordId'
+    | '/_protected/the-dojo/admin/tasks/$recordId'
+    | '/_protected/the-dojo/admin/users/$recordId'
+    | '/_protected/the-dojo/admin/subjects/'
+    | '/_protected/the-dojo/admin/tasks/'
+    | '/_protected/the-dojo/admin/users/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -186,18 +277,97 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedTicketpageTicketIdRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/the-dojo/admin': {
+      id: '/_protected/the-dojo/admin'
+      path: '/the-dojo/admin'
+      fullPath: '/the-dojo/admin'
+      preLoaderRoute: typeof ProtectedTheDojoAdminRouteRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/the-dojo/admin/users/': {
+      id: '/_protected/the-dojo/admin/users/'
+      path: '/users'
+      fullPath: '/the-dojo/admin/users'
+      preLoaderRoute: typeof ProtectedTheDojoAdminUsersIndexRouteImport
+      parentRoute: typeof ProtectedTheDojoAdminRouteRoute
+    }
+    '/_protected/the-dojo/admin/tasks/': {
+      id: '/_protected/the-dojo/admin/tasks/'
+      path: '/tasks'
+      fullPath: '/the-dojo/admin/tasks'
+      preLoaderRoute: typeof ProtectedTheDojoAdminTasksIndexRouteImport
+      parentRoute: typeof ProtectedTheDojoAdminRouteRoute
+    }
+    '/_protected/the-dojo/admin/subjects/': {
+      id: '/_protected/the-dojo/admin/subjects/'
+      path: '/subjects'
+      fullPath: '/the-dojo/admin/subjects'
+      preLoaderRoute: typeof ProtectedTheDojoAdminSubjectsIndexRouteImport
+      parentRoute: typeof ProtectedTheDojoAdminRouteRoute
+    }
+    '/_protected/the-dojo/admin/users/$recordId': {
+      id: '/_protected/the-dojo/admin/users/$recordId'
+      path: '/users/$recordId'
+      fullPath: '/the-dojo/admin/users/$recordId'
+      preLoaderRoute: typeof ProtectedTheDojoAdminUsersRecordIdRouteImport
+      parentRoute: typeof ProtectedTheDojoAdminRouteRoute
+    }
+    '/_protected/the-dojo/admin/tasks/$recordId': {
+      id: '/_protected/the-dojo/admin/tasks/$recordId'
+      path: '/tasks/$recordId'
+      fullPath: '/the-dojo/admin/tasks/$recordId'
+      preLoaderRoute: typeof ProtectedTheDojoAdminTasksRecordIdRouteImport
+      parentRoute: typeof ProtectedTheDojoAdminRouteRoute
+    }
+    '/_protected/the-dojo/admin/subjects/$recordId': {
+      id: '/_protected/the-dojo/admin/subjects/$recordId'
+      path: '/subjects/$recordId'
+      fullPath: '/the-dojo/admin/subjects/$recordId'
+      preLoaderRoute: typeof ProtectedTheDojoAdminSubjectsRecordIdRouteImport
+      parentRoute: typeof ProtectedTheDojoAdminRouteRoute
+    }
   }
 }
+
+interface ProtectedTheDojoAdminRouteRouteChildren {
+  ProtectedTheDojoAdminSubjectsRecordIdRoute: typeof ProtectedTheDojoAdminSubjectsRecordIdRoute
+  ProtectedTheDojoAdminTasksRecordIdRoute: typeof ProtectedTheDojoAdminTasksRecordIdRoute
+  ProtectedTheDojoAdminUsersRecordIdRoute: typeof ProtectedTheDojoAdminUsersRecordIdRoute
+  ProtectedTheDojoAdminSubjectsIndexRoute: typeof ProtectedTheDojoAdminSubjectsIndexRoute
+  ProtectedTheDojoAdminTasksIndexRoute: typeof ProtectedTheDojoAdminTasksIndexRoute
+  ProtectedTheDojoAdminUsersIndexRoute: typeof ProtectedTheDojoAdminUsersIndexRoute
+}
+
+const ProtectedTheDojoAdminRouteRouteChildren: ProtectedTheDojoAdminRouteRouteChildren =
+  {
+    ProtectedTheDojoAdminSubjectsRecordIdRoute:
+      ProtectedTheDojoAdminSubjectsRecordIdRoute,
+    ProtectedTheDojoAdminTasksRecordIdRoute:
+      ProtectedTheDojoAdminTasksRecordIdRoute,
+    ProtectedTheDojoAdminUsersRecordIdRoute:
+      ProtectedTheDojoAdminUsersRecordIdRoute,
+    ProtectedTheDojoAdminSubjectsIndexRoute:
+      ProtectedTheDojoAdminSubjectsIndexRoute,
+    ProtectedTheDojoAdminTasksIndexRoute: ProtectedTheDojoAdminTasksIndexRoute,
+    ProtectedTheDojoAdminUsersIndexRoute: ProtectedTheDojoAdminUsersIndexRoute,
+  }
+
+const ProtectedTheDojoAdminRouteRouteWithChildren =
+  ProtectedTheDojoAdminRouteRoute._addFileChildren(
+    ProtectedTheDojoAdminRouteRouteChildren,
+  )
 
 interface ProtectedRouteChildren {
   ProtectedRaiseTicketRoute: typeof ProtectedRaiseTicketRoute
   ProtectedIndexRoute: typeof ProtectedIndexRoute
+  ProtectedTheDojoAdminRouteRoute: typeof ProtectedTheDojoAdminRouteRouteWithChildren
   ProtectedTicketpageTicketIdRoute: typeof ProtectedTicketpageTicketIdRoute
 }
 
 const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedRaiseTicketRoute: ProtectedRaiseTicketRoute,
   ProtectedIndexRoute: ProtectedIndexRoute,
+  ProtectedTheDojoAdminRouteRoute: ProtectedTheDojoAdminRouteRouteWithChildren,
   ProtectedTicketpageTicketIdRoute: ProtectedTicketpageTicketIdRoute,
 }
 

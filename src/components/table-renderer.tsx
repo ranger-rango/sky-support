@@ -23,17 +23,28 @@ export default function RenderTable(table : RenderTableProps)
             <tbody>
                 {
                     table.tableData.map((row) => (
-                        <tr key={row.ticket_id} onClick={() => table.onRowClick && table.onRowClick(row)} className={table.onRowClick ? "cursor-pointer" : ""} >
+                        <tr key={row.id} onClick={() => table.onRowClick && table.onRowClick(row)} className={table.onRowClick ? "cursor-pointer" : ""} >
                             {
                                 table.colHeaders.map((col) => 
                                 {
                                     if (!col.hide && typeof row[col.id] !== "undefined")
                                     {
-                                        return (
-                                            <td key={col.id}>
-                                                {row[col.id]}
-                                            </td>
-                                        )
+                                        if (col.render)
+                                        {
+                                            return (
+                                                <td key={col.id}>
+                                                    { col.render(row[col.id]) }
+                                                </td>
+                                            )
+                                        }
+                                        else
+                                        {
+                                            return (
+                                                <td key={col.id}>
+                                                    {row[col.id]}
+                                                </td>
+                                            )
+                                        }
                                     }
                                     else
                                     {

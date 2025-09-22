@@ -25,7 +25,7 @@ export default function HandleSubmit(formData : FormData)
     let ticketData : any[] = JSON.parse(localStorage.getItem("ticketData") || "[]")
 
     const formObject : Record<string, any> = {}
-    formObject["ticket_id"] = genID()
+    formObject["id"] = genID()
     // formObject["ticket_id"] = typeof submitProps.ticketId !== "undefined" ? submitProps.ticketId : genID()
 
     const promises : Promise<void>[] = []

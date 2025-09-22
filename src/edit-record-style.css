@@ -1,0 +1,82 @@
+.record-info-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid var(--primary-nav);
+    box-shadow: .3rem .5rem .5rem .3rem var(--primary-nav);
+    padding: 1rem;
+    width: fit-content;
+    margin-top: 1rem;
+}
+
+.record-prof {
+    height: inherit;
+    height: 15rem;
+    width: 15rem;
+}
+
+.record-prof img {
+    width: 100%;
+    height: 100%;
+}
+
+.record-info-inner-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    height: 15rem;
+}
+
+.rcd-info {
+    color: black;
+    font-size: .8rem;
+    font-weight: 550;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+    line-height: 1.5rem;
+}
+
+.rcd-value {
+    color: black;
+    font-size: .8rem;
+    font-weight: 100;
+}
+
+#edit-record-form {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    width: 36rem;
+    padding: 1rem;
+}
+#edit-record-form h3 {
+    grid-column: 1/-1;
+}
+
+#edit-record-form select {
+    padding: .3rem;
+    color: black;
+}
+
+#edit-record-form select:focus {
+    outline: none;
+}
+
+#edit-record-form option {
+    color: black;
+}
+
+#edit-record-form option:focus {
+    outline: none;
+}
+
+.nxt-prev-btns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}

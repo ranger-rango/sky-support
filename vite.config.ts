@@ -21,4 +21,16 @@ export default defineConfig({
     react(),
     // ...,
   ],
+  server : 
+  {
+    proxy : 
+    {
+      "/api" : 
+      {
+        target : "https://the-dojo.pagoda.africa",
+        changeOrigin : true,
+        secure : true,
+      }
+    }
+  }
 })
