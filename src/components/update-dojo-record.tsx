@@ -22,12 +22,8 @@ export default function useUpdateDojoRecord(url : string, token : string, method
                 }
                 if (key === "parameter_value")
                 {
-                    currVal = value.toString()
-                    if (!isNaN(Number(currVal)) && currVal.trim() !== "")
-                    {
-                        currVal = Number(currVal);
-                    }
-                    formObject[currKey] = currVal
+                    const num = Number(value)
+                    formObject[currKey] = isNaN(num) ? value.toString() : num
                     currKey = ""
                     currVal = ""
                 }
