@@ -154,6 +154,17 @@ body {
 
 .side-panel p:hover {
   background-color: var(--primary-nav-hover);
+  cursor: pointer;
+}
+
+.panel-links {
+  text-decoration: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: .8rem;
 }
 
 .sp-label.collapsed {
