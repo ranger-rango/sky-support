@@ -93,7 +93,7 @@ export default function TasksPage()
         setFilters([...filters]);
     }
 
-    const formFileds = [ "subject_id", "title", "description", "requirements", "due_date", "max_score"]
+    const formFields = [ "subject_id", "title", "description", "requirements", "due_date", "max_score"]
     const [payload, setPayload] = useState<any>(null)
     const [endpoint, setEndpoint] = useState<string | null>(null)
     const { data, loading, error } = useMutateData(endpoint ?? "", adminToken, "POST", payload)
@@ -105,7 +105,8 @@ export default function TasksPage()
         
         for (const [key, value] of  formData.entries())
         {
-            formObject[key] = value           
+            const num = Number(value)
+            formObject[key] =  isNaN(num) ? value : num           
         }
         setEndpoint(url)
         setPayload(formObject)
@@ -125,7 +126,7 @@ export default function TasksPage()
                         <FilterWrapper fields={ticketColHeaders} onApply={handleApplyFilters} />
                     </VisibilityProvider>
                     <VisibilityProvider>
-                        <DojoCreate fields={formFileds} btnLabel="Create Task" onCreate={createRecord} />
+                        <DojoCreate fields={formFields} btnLabel="Create Task" onCreate={createRecord} />
                     </VisibilityProvider>
                 </div>
             </div>

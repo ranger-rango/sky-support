@@ -28,7 +28,7 @@ export function DojoCreate({ btnLabel, fields, onCreate } : CreateProps)
             visibility && (
                 <div className="modal-overlay">
                     <div className="modal">
-                        <h3>Create Task</h3>
+                        <h3> {btnLabel} </h3>
 
                         <form id="togo-create" onSubmit={handleApply} >
                             {
