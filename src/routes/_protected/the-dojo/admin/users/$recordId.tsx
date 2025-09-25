@@ -14,11 +14,13 @@ export const Route = createFileRoute('/_protected/the-dojo/admin/users/$recordId
 function RouteComponent()
 {
   const { recordId } = Route.useParams()
-  const adminToken : string = "0b008ea4-07fa-435f-906d-76f134078e3d-mdcedoc7"
-  const baseUrl : string = "/api"
-  const url : string = `${baseUrl}/admin/users/${recordId}`
+  const adminToken : string = import.meta.env.VITE_ADMIN_TOKEN
+  const baseUrl : string = import.meta.env.VITE_BASE_URL
+  const usersEndpoint : string = import.meta.env.VITE_USERS_ENDPOINT
+  const url : string = `${baseUrl}${usersEndpoint}/${recordId}`
 
-  const { data, loading, error } = useFetchData(url, adminToken)
+  // const { data, loading, error } = useFetchData(url, adminToken)
+  const { data, isLoading, error } = useFetchData(url, adminToken)
   const recordData = data?.user
 
   const [param, setParam] = useState<string | null>(null)
@@ -53,7 +55,7 @@ function RouteComponent()
     nav({to : ".."})
   }
 
-  if (loading) return <p>Loading ...</p>
+  if (isLoading) return <p>Loading ...</p>
   if (error) return <p>Error: {error.message} </p>
 
   return (

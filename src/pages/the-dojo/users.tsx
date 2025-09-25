@@ -42,10 +42,10 @@ export default function UsersPage()
         }
     ]
     
-    
-    const adminToken : string = "0b008ea4-07fa-435f-906d-76f134078e3d-mdcedoc7"
-    const baseUrl : string = "/api"
-    const url : string = `${baseUrl}/admin/users/`
+    const adminToken : string = import.meta.env.VITE_ADMIN_TOKEN
+    const baseUrl : string = import.meta.env.VITE_BASE_URL
+    const usersEndpoint : string = import.meta.env.VITE_USERS_ENDPOINT
+    const url : string = `${baseUrl}${usersEndpoint}/`
 
     const [sorts, setSorts] = useState<{ column: string; order: string }[]>([]);
     const [filters, setFilters] = useState<{ column: string; relation: string; filt_value: string }[]>([]);

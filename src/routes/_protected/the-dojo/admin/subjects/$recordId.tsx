@@ -3,6 +3,7 @@ import Button from '../../../../../components/btn'
 import useFetchData from '../../../../../components/use-fetch-data'
 import type { FormEvent } from 'react'
 import useUpdateDojoRecord from '../../../../../components/update-dojo-record'
+import { useForm, type FieldValues, type SubmitHandler } from 'react-hook-form'
 
 export const Route = createFileRoute(
   '/_protected/the-dojo/admin/subjects/$recordId',
@@ -13,18 +14,25 @@ export const Route = createFileRoute(
 function RouteComponent()
 {
   const { recordId } = Route.useParams()
-  const adminToken : string = "0b008ea4-07fa-435f-906d-76f134078e3d-mdcedoc7"
-  const baseUrl : string = "/api"
-  const url : string = `${baseUrl}/admin/subjects/${recordId}`
+    const adminToken : string = import.meta.env.VITE_ADMIN_TOKEN
+    const baseUrl : string = import.meta.env.VITE_BASE_URL
+    const subjectsEndpoint : string = import.meta.env.VITE_SUBJECTS_ENDPOINT
+    const url : string = `${baseUrl}${subjectsEndpoint}/${recordId}`
 
-  const { data, loading, error } = useFetchData(url, adminToken)
+  const { data, isLoading, error } = useFetchData(url, adminToken)
   
   const recordData = data?.subject
 
   const { CUDFunc, data : updateData, loading : updateLoading, error : updateError } = useUpdateDojoRecord(url, adminToken, "PUT", "")
+
   const handleSubmit = (e : FormEvent<HTMLFormElement>) => 
   {
     e.preventDefault()
+    // const formData = new FormData()
+    // Object.entries(data).forEach(([key, value]) =>
+    // {
+    //     formData.append(key, value as string)
+    // })
     const formData = new FormData(e.currentTarget)
     CUDFunc(formData) 
     {updateLoading && <p>Updating user...</p>}
@@ -44,7 +52,7 @@ function RouteComponent()
     nav({to : ".."})
   }
 
-  if (loading) return <p>Loading ...</p>
+  if (isLoading) return <p>Loading ...</p>
   if (error) return <p>Error: {error.message} </p>
 
   return (

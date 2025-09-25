@@ -13,11 +13,12 @@ export const Route = createFileRoute(
 function RouteComponent()
 {
   const { recordId } = Route.useParams()
-  const adminToken : string = "0b008ea4-07fa-435f-906d-76f134078e3d-mdcedoc7"
-  const baseUrl : string = "/api"
-  const url : string = `${baseUrl}/admin/tasks/${recordId}`
+  const adminToken : string = import.meta.env.VITE_ADMIN_TOKEN
+  const baseUrl : string = import.meta.env.VITE_BASE_URL
+  const tasksEndpoint : string = import.meta.env.VITE_TASKS_ENDPOINT
+  const url : string = `${baseUrl}${tasksEndpoint}/${recordId}`
 
-  const { data, loading, error } = useFetchData(url, adminToken)
+  const { data, isLoading, error } = useFetchData(url, adminToken)
   const recordData = data?.task
 
   const { CUDFunc, data : updateData, loading : updateLoading, error : updateError } = useUpdateDojoRecord(url, adminToken, "PUT", "")
@@ -44,7 +45,7 @@ function RouteComponent()
     nav({to : ".."})
   }
   
-  if (loading) return <p>Loading ...</p>
+  if (isLoading) return <p>Loading ...</p>
   if (error) return <p>Error: {error.message} </p>
 
   return (

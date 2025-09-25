@@ -4,7 +4,8 @@ import { VisibilityProvider } from "../../components/dojo-sort-filter-context";
 import { FilterWrapper } from "../../components/dojo-filter-wrapper";
 import { SortWrapper } from "../../components/dojo-sort-wrapper";
 import { DojoCreate } from "../../components/dojo-create";
-import useMutateData from "../../components/use-mutate-data";
+// import useMutateData from "../../components/use-mutate-data";
+import useUpdateDojoRecord from "../../components/update-dojo-record";
 
 export default function SubjectsPage()
 {
@@ -52,9 +53,10 @@ export default function SubjectsPage()
     ]
     
     
-    const adminToken : string = "0b008ea4-07fa-435f-906d-76f134078e3d-mdcedoc7"
-    const baseUrl : string = "/api"
-    const url : string = `${baseUrl}/admin/subjects/`
+    const adminToken : string = import.meta.env.VITE_ADMIN_TOKEN
+    const baseUrl : string = import.meta.env.VITE_BASE_URL
+    const subjectsEndpoint : string = import.meta.env.VITE_SUBJECTS_ENDPOINT
+    const url : string = `${baseUrl}${subjectsEndpoint}/`
 
     const [sorts, setSorts] = useState<{ column: string; order: string }[]>([]);
     const [filters, setFilters] = useState<{ column: string; relation: string; filt_value: string }[]>([]);
@@ -72,9 +74,10 @@ export default function SubjectsPage()
     }
 
     const formFields = ["name", "description"]
-    const [payload, setPayload] = useState<any>(null)
-    const [endpoint, setEndpoint] = useState<string | null>(null)
-    const { data, loading, error } = useMutateData(endpoint ?? "", adminToken, "POST", payload)
+    // const [payload, setPayload] = useState<any>(null)
+    // const [endpoint, setEndpoint] = useState<string | null>(null)
+    // const { data, loading, error } = useMutateData(endpoint ?? "", adminToken, "POST", payload)
+    const { CUDFunc, data, loading, error } = useUpdateDojoRecord(url, adminToken, "POST", "")
 
     const createRecord = (formData : FormData) => 
     {
@@ -85,8 +88,9 @@ export default function SubjectsPage()
         {
             formObject[key] = value           
         }
-        setEndpoint(url)
-        setPayload(formObject)
+        CUDFunc(formObject)
+        // setEndpoint(url)
+        // setPayload(formObject)
     }
 
     return (

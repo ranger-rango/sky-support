@@ -44,14 +44,15 @@ export default function DojoRender( { adminToken, baseUrl, ticketColHeaders, sin
 
     const url = `${baseUrl}?page=${currPage}&pageSize=${pageSize}${sortParam}${filterParam}`
 
-    const { data, loading, error } = useFetchData(url, adminToken)
+    // const { data, loading, error } = useFetchData(url, adminToken)
+    const { data, isLoading, error } = useFetchData(url, adminToken)
     const recordsData : {}[] = data?.records ?? []
     const totalPages = Math.ceil(data?.total_count / data?.page_size)
     const prevPage = () => setCurrPage((p) => Math.max(p - 1, 0))
     const nextPage = () => setCurrPage((p) => Math.min(p + 1, totalPages))
 
 
-    if (loading) return <p>Loading ...</p>
+    if (isLoading) return <p>Loading ...</p>
     if (error) return <p>Error: {error.message} </p>
 
     return (

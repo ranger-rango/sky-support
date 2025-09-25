@@ -4,7 +4,8 @@ import { VisibilityProvider } from "../../components/dojo-sort-filter-context";
 import { FilterWrapper } from "../../components/dojo-filter-wrapper";
 import { SortWrapper } from "../../components/dojo-sort-wrapper";
 import { DojoCreate } from "../../components/dojo-create";
-import useMutateData from "../../components/use-mutate-data";
+// import useMutateData from "../../components/use-mutate-data";
+import useUpdateDojoRecord from "../../components/update-dojo-record";
 
 export default function TasksPage()
 {
@@ -76,9 +77,10 @@ export default function TasksPage()
     ]
     
     
-    const adminToken : string = "0b008ea4-07fa-435f-906d-76f134078e3d-mdcedoc7"
-    const baseUrl : string = "/api"
-    const url : string = `${baseUrl}/admin/tasks/`
+    const adminToken : string = import.meta.env.VITE_ADMIN_TOKEN
+    const baseUrl : string = import.meta.env.VITE_BASE_URL
+    const tasksEndpoint : string = import.meta.env.VITE_TASKS_ENDPOINT
+    const url : string = `${baseUrl}${tasksEndpoint}/`
 
     const [sorts, setSorts] = useState<{ column: string; order: string }[]>([]);
     const [filters, setFilters] = useState<{ column: string; relation: string; filt_value: string }[]>([]);
@@ -94,9 +96,10 @@ export default function TasksPage()
     }
 
     const formFields = [ "subject_id", "title", "description", "requirements", "due_date", "max_score"]
-    const [payload, setPayload] = useState<any>(null)
-    const [endpoint, setEndpoint] = useState<string | null>(null)
-    const { data, loading, error } = useMutateData(endpoint ?? "", adminToken, "POST", payload)
+    // const [payload, setPayload] = useState<any>(null)
+    // const [endpoint, setEndpoint] = useState<string | null>(null)
+    // const { data, loading, error } = useMutateData(endpoint ?? "", adminToken, "POST", payload)
+    const { CUDFunc, data, loading, error } = useUpdateDojoRecord(url, adminToken, "POST", "")
 
     const createRecord = (formData : FormData) => 
     {
@@ -108,8 +111,9 @@ export default function TasksPage()
             const num = Number(value)
             formObject[key] =  isNaN(num) ? value : num           
         }
-        setEndpoint(url)
-        setPayload(formObject)
+        CUDFunc(formObject)
+        // setEndpoint(url)
+        // setPayload(formObject)
     }
 
     return (

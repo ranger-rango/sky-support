@@ -1,6 +1,7 @@
-import type { FormEvent } from "react";
+// import type { FormEvent } from "react";
 import Button from "./btn";
 import { showModal } from "./dojo-sort-filter-context";
+import { useForm, type SubmitHandler } from "react-hook-form";
 
 interface CreateProps
 {
@@ -9,18 +10,40 @@ interface CreateProps
     onCreate : (data : any) => void
 }
 
+interface FormValues
+{
+    [key : string] : string
+}
+
 export function DojoCreate({ btnLabel, fields, onCreate } : CreateProps)
 {
     const { visibility, toggleVisibility } = showModal();
 
-    const handleApply = (e : FormEvent<HTMLFormElement>) => 
+    // const handleApply = (e : FormEvent<HTMLFormElement>) => 
+    // {
+    //     e.preventDefault()
+    //     const formData = new FormData(e.currentTarget)
+    //     onCreate(formData)
+    //     toggleVisibility()
+    // };
+    const { register, handleSubmit, formState : { errors } } = useForm<FormValues>(
+        {
+            mode : "all"
+        }
+    )
+
+    const onSubmit : SubmitHandler<FormValues> = (data) => 
     {
-        e.preventDefault()
-        const formData = new FormData(e.currentTarget)
+        const formData = new FormData();
+        Object.entries(data).forEach(([key, value]) => 
+        {
+            formData.append(key, value);
+        });
         onCreate(formData)
         toggleVisibility()
-    };
-  return (
+    }
+
+    return (
     <>
         <button onClick={toggleVisibility} className="gen-btn pri-btn"> {btnLabel} </button>
 
@@ -30,12 +53,13 @@ export function DojoCreate({ btnLabel, fields, onCreate } : CreateProps)
                     <div className="modal">
                         <h3> {btnLabel} </h3>
 
-                        <form id="togo-create" onSubmit={handleApply} >
+                        <form id="togo-create" onSubmit={handleSubmit(onSubmit)} >
                             {
                                 fields.map((field) => (
                                     <div key={field}>
                                         <label htmlFor={field}> {field} </label>
-                                        <input type="text" name={field} id={field} />
+                                        <input type="text" id={field} {...register(field, { required : `${field} is required` })} />
+                                        { errors[field] && <p className="form-errors"> { errors[field]?.message } </p> }
                                     </div>
                                 ))
                             }
