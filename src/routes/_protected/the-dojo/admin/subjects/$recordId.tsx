@@ -3,7 +3,6 @@ import Button from '../../../../../components/btn'
 import useFetchData from '../../../../../components/use-fetch-data'
 import type { FormEvent } from 'react'
 import useUpdateDojoRecord from '../../../../../components/update-dojo-record'
-import { useForm, type FieldValues, type SubmitHandler } from 'react-hook-form'
 
 export const Route = createFileRoute(
   '/_protected/the-dojo/admin/subjects/$recordId',
